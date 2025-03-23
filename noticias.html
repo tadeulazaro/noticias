@@ -1,48 +1,278 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Notícias em Tempo Real</title>
-    <link rel="stylesheet" href="styles.css"> <!-- Verifique se o arquivo styles.css está no mesmo diretório -->
-</head>
-<body>
-    <header>
-        <h1>Últimas Notícias</h1>
-    </header>
-    <main id="news-container">
-        <p>Carregando notícias...</p>
-    </main>
-    <script>
-        async function fetchNews() {
-            try {
-                // Requisição para a função serverless no Vercel
-                const response = await fetch('https://noticias-tau.vercel.app/api/noticias');
-                const data = await response.json();
-                const newsContainer = document.getElementById('news-container');
-                newsContainer.innerHTML = '';
-
-                if (data.status === 'ok' && Array.isArray(data.articles) && data.articles.length > 0) {
-                    data.articles.forEach(article => {
-                        const newsItem = document.createElement('div');
-                        newsItem.classList.add('news-item');
-                        newsItem.innerHTML = `
-                            <h2><a href="${article.url}" target="_blank">${article.title}</a></h2>
-                            <p>${article.description || 'Descrição não disponível'}</p>
-                        `;
-                        newsContainer.appendChild(newsItem);
-                    });
-                } else {
-                    newsContainer.innerHTML = '<p>Não há notícias disponíveis no momento.</p>';
-                }
-            } catch (error) {
-                console.error('Erro ao buscar notícias:', error);
-                const newsContainer = document.getElementById('news-container');
-                newsContainer.innerHTML = '<p>Erro ao carregar notícias. Tente novamente mais tarde.</p>';
-            }
+    <title>Notícias Engajamento</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
-        fetchNews();
-    </script>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            line-height: 1.6;
+            padding: 0;
+            margin: 0;
+        }
+
+        header {
+            background-color: #004D40;
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            letter-spacing: 2px;
+        }
+
+        section {
+            padding: 50px 20px;
+            margin: 0 auto;
+            width: 90%;
+            max-width: 1200px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            color: #004D40;
+            margin-bottom: 30px;
+        }
+
+        #news-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            justify-items: center;
+        }
+
+        .news-item {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            width: 100%;
+            max-width: 350px;
+            text-align: center;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .news-item:hover {
+            transform: translateY(-10px);
+        }
+
+        .news-item img {
+            width: 100%;
+            height: auto;
+            border-bottom: 2px solid #004D40;
+        }
+
+        .news-item h2 {
+            font-size: 1.5rem;
+            color: #333;
+            padding: 15px 10px;
+        }
+
+        .news-item p {
+            color: #555;
+            padding: 0 10px 15px;
+            font-size: 1rem;
+            margin-bottom: 20px;
+        }
+
+        .read-more {
+            display: inline-block;
+            background-color: #004D40;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+        .read-more:hover {
+            background-color: #00796B;
+        }
+
+        footer {
+            background-color: #004D40;
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        footer p {
+            font-size: 1rem;
+        }
+
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Notícias Engajamento</h1>
+</header>
+
+<!-- Seção de Tecnologia -->
+<section id="tecnologia">
+    <h2 class="section-title">Tecnologia</h2>
+    <div id="news-container">
+        <div class="news-item">
+            <img src="https://via.placeholder.com/600x200" alt="Tecnologia">
+            <h2><a href="#">Transformação Digital no Brasil</a></h2>
+            <p>Empresas estão se reinventando para se manter competitivas no cenário digital.</p>
+            <a href="#" class="read-more">Leia mais</a>
+        </div>
+
+        <div class="news-item">
+            <img src="https://via.placeholder.com/600x200" alt="Tecnologia">
+            <h2><a href="#">Startups que Estão Mudando o Mercado</a></h2>
+            <p>As startups estão moldando o futuro da economia mundial.</p>
+            <a href="#" class="read-more">Leia mais</a>
+        </div>
+
+        <div class="news-item">
+            <img src="https://via.placeholder.com/600x200" alt="Tecnologia">
+            <h2><a href="#">Como Investir no Mercado de Ações</a></h2>
+            <p>Entenda as melhores estratégias para investir de forma inteligente no mercado financeiro.</p>
+            <a href="#" class="read-more">Leia mais</a>
+        </div>
+
+        <div class="news-item">
+            <img src="https://via.placeholder.com/600x200" alt="Tecnologia">
+            <h2><a href="#">Inteligência Artificial no Mercado de Trabalho</a></h2>
+            <p>Como a IA está mudando a forma de trabalhar e as novas oportunidades.</p>
+            <a href="#" class="read-more">Leia mais</a>
+        </div>
+
+        <div class="news-item">
+            <img src="https://via.placeholder.com/600x200" alt="Tecnologia">
+            <h2><a href="#">O Futuro do 5G no Brasil</a></h2>
+            <p>Quais os impactos do 5G nas cidades e como ele vai transformar a internet móvel.</p>
+            <a href="#" class="read-more">Leia mais</a>
+        </div>
+    </div>
+</section>
+
+<!-- Seção de Entretenimento -->
+<section id="entretenimento">
+    <h2 class="section-title">Entretenimento</h2>
+    <div id="news-container">
+        <div class="news-item">
+            <img src="https://via.placeholder.com/600x200" alt="Entretenimento">
+            <h2><a href="#">Os Filmes Mais Esperados de 2025</a></h2>
+            <p>Confira os lançamentos cinematográficos que prometem agitar o ano.</p>
+            <a href="#" class="read-more">Leia mais</a>
+        </div>
+
+        <div class="news-item">
+            <img src="https://via.placeholder.com/600x200" alt="Entretenimento">
+            <h2><a href="#">A Ascensão dos Jogos Eletrônicos no Brasil</a></h2>
+            <p>Como os eSports têm ganhado cada vez mais popularidade e reconhecimento no país.</p>
+            <a href="#" class="read-more">Leia mais</a>
+        </div>
+
+        <div class="news-item">
+            <img src="https://via.placeholder.com/600x200" alt="Entretenimento">
+            <h2><a href="#">Música Brasileira em Alta no Mercado Internacional</a></h2>
+            <p>Artistas brasileiros têm se destacado cada vez mais no cenário musical mundial.</p>
+            <a href="#" class="read-more">Leia mais</a>
+        </div>
+
+        <div class="news-item">
+            <img src="https://via.placeholder.com/600x200" alt="Entretenimento">
+            <h2><a href="#">Reality Shows que Dominam a TV Brasileira</a></h2>
+            <p>Esses programas estão conquistando o público e virando fenômenos.</p>
+            <a href="#" class="read-more">Leia mais</a>
+        </div>
+
+        <div class="news-item">
+            <img src="https://via.placeholder.com/600x200" alt="Entretenimento">
+            <h2><a href="#">Comédias que Prometem Arrancar Risos em 2025</a></h2>
+            <p>Os filmes de comédia mais esperados do ano que você não pode perder.</p>
+            <a href="#" class="read-more">Leia mais</a>
+        </div>
+    </div>
+</section>
+
+<!-- Seção de Esportes -->
+<section id="esportes">
+    <h2 class="section-title">Esportes</h2>
+    <div id="news-container">
+        <div class="news-item">
+            <img src="https://via.placeholder.com/600x200" alt="Esportes">
+            <h2><a href="#">Futebol Brasileiro: Expectativa para a Copa do Mundo</a></h2>
+            <p>Confira tudo sobre a preparação da seleção para o maior evento do futebol.</p>
+            <a href="#" class="read-more">Leia mais</a>
+        </div>
+
+        <div class="news-item">
+            <img src="https://via.placeholder.com/600x200" alt="Esportes">
+            <h2><a href="#">O Crescimento do Basquete no Brasil</a></h2>
+            <p>Como o basquete está ganhando força no país e a nova geração de jogadores.</p>
+            <a href="#" class="read-more">Leia mais</a>
+        </div>
+
+        <div class="news-item">
+            <img src="https://via.placeholder.com/600x200" alt="Esportes">
+            <h2><a href="#">Os Grandes Recordes do Atletismo</a></h2>
+            <p>Os atletas brasileiros estão quebrando recordes e se destacando no mundo todo.</p>
+            <a href="#" class="read-more">Leia mais</a>
+        </div>
+
+        <div class="news-item">
+            <img src="https://via.placeholder.com/600x200" alt="Esportes">
+            <h2><a href="#">Crescimento do MMA no Brasil</a></h2>
+            <p>Como o MMA tem se tornado cada vez mais popular, atraindo grandes públicos.</p>
+            <a href="#" class="read-more">Leia mais</a>
+        </div>
+
+        <div class="news-item">
+            <img src="https://via.placeholder.com/600x200" alt="Esportes">
+            <h2><a href="#">Os Atletas Mais Bem Pagos do Mundo</a></h2>
+            <p>Os contratos milionários que transformaram atletas em ícones financeiros.</p>
+            <a href="#" class="read-more">Leia mais</a>
+        </div>
+    </div>
+</section>
+
+<!-- Seção de Saúde -->
+<section id="saude">
+    <h2 class="section-title">Saúde</h2>
+    <div id="news-container">
+        <div class="news-item">
+            <img src="https://via.placeholder.com/600x200" alt="Saúde">
+            <h2><a href="#">Avanços no Tratamento do Câncer</a></h2>
+            <p>Como as novas tecnologias estão revolucionando o tratamento e a cura do câncer.</p>
+            <a href="#" class="read-more">Leia mais</a>
+        </div>
+
+        <div class="news-item">
+            <img src="https://via.placeholder.com/600x200" alt="Saúde">
+            <h2><a href="#">Cuidados Essenciais para o Coração</a></h2>
+            <p>Prevenção e tratamentos para garantir uma vida saudável para o seu coração.</p>
+            <a href="#" class="read-more">Leia mais</a>
+        </div>
+
+        <div class="news-item">
+            <img src="https://via.placeholder.com/600x200" alt="Saúde">
+            <h2><a href="#">Alimentos que Ajudam a Melhorar a Imunidade</a></h2>
+            <p>O que comer para fortalecer o sistema imunológico e prevenir doenças.</p>
+            <a href="#" class="read-more">Leia mais</a>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <p>&copy; 2025 Notícias Engajamento - Todos os direitos reservados.</p>
+</footer>
+
 </body>
 </html>
