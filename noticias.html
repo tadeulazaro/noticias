@@ -1,50 +1,28 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Notícias em Tempo Real</title>
-    <link rel="stylesheet" href="styles.css"> <!-- Verifique se o arquivo styles.css está no mesmo diretório -->
-</head>
-<body>
-    <header>
-        <h1>Últimas Notícias</h1>
-    </header>
-    <main id="news-container">
-        <p>Carregando notícias...</p>
-    </main>
-    <script>
-        async function fetchNews() {
-            const apiKey = 'ee4e0f9306c94eef9444e4aceeb2641a'; // Sua chave de API da NewsAPI
-            const targetUrl = `https://newsapi.org/v2/top-headlines?country=br&apiKey=${apiKey}`;
-            
-            try {
-                const response = await fetch(targetUrl); // Requisição sem proxy
-                const data = await response.json();
-                const newsContainer = document.getElementById('news-container');
-                newsContainer.innerHTML = '';
+async function fetchNews() {
+  try {
+    const response = await fetch('/api/noticias');
+    const data = await response.json();
+    const newsContainer = document.getElementById('news-container');
+    newsContainer.innerHTML = '';
 
-                if (data.status === 'ok' && Array.isArray(data.articles) && data.articles.length > 0) {
-                    data.articles.forEach(article => {
-                        const newsItem = document.createElement('div');
-                        newsItem.classList.add('news-item');
-                        newsItem.innerHTML = `
-                            <h2><a href="${article.url}" target="_blank">${article.title}</a></h2>
-                            <p>${article.description || 'Descrição não disponível'}</p>
-                        `;
-                        newsContainer.appendChild(newsItem);
-                    });
-                } else {
-                    newsContainer.innerHTML = '<p>Não há notícias disponíveis no momento.</p>';
-                }
-            } catch (error) {
-                console.error('Erro ao buscar notícias:', error);
-                const newsContainer = document.getElementById('news-container');
-                newsContainer.innerHTML = '<p>Erro ao carregar notícias. Tente novamente mais tarde.</p>';
-            }
-        }
+    if (data.status === 'ok' && Array.isArray(data.articles) && data.articles.length > 0) {
+      data.articles.forEach(article => {
+        const newsItem = document.createElement('div');
+        newsItem.classList.add('news-item');
+        newsItem.innerHTML = `
+          <h2><a href="${article.url}" target="_blank">${article.title}</a></h2>
+          <p>${article.description || 'Descrição não disponível'}</p>
+        `;
+        newsContainer.appendChild(newsItem);
+      });
+    } else {
+      newsContainer.innerHTML = '<p>Não há notícias disponíveis no momento.</p>';
+    }
+  } catch (error) {
+    console.error('Erro ao buscar notícias:', error);
+    const newsContainer = document.getElementById('news-container');
+    newsContainer.innerHTML = '<p>Erro ao carregar notícias. Tente novamente mais tarde.</p>';
+  }
+}
 
-        fetchNews();
-    </script>
-</body>
-</html>
+fetchNews();
